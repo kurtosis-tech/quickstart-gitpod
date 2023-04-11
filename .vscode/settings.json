@@ -1,6 +1,6 @@
 {
     "files.associations": {
-        "*.star": "python"
+        "*.star": "starlark"
     },
     "workbench.editorAssociations": {
         "*.md": "vscode.markdown.preview.editor"
