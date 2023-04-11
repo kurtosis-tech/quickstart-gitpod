@@ -3,8 +3,12 @@ image:
 
 tasks:
   - name: Restart Kurtosis Engine
-    command: | 
+    command: |
       kurtosis engine restart
+      clear
+  - name: Run Fake Package
+    command: | 
+      kurtosis run github.com/fake-package/fake-package-purely-for-analytics || kurtosis clean -a
       clear
   - name: Open Readme
     command: |
