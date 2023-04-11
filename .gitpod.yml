@@ -19,3 +19,11 @@ tasks:
       source <(kurtosis completion bash)
       echo "source <(kurtosis completion bash)" >> ~/.bashrc
       clear  
+
+ports:
+  - name: Kurtosis Engine Grpc Listen
+    port: 9710
+    onOpen: ignore
+  - name: Kurtosis Engine Grpc Proxy Listen
+    port: 9710
+    onOpen: ignore    
