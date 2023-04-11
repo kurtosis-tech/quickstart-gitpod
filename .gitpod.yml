@@ -1,0 +1,17 @@
+image:
+  file: .gitpod.Dockerfile
+
+tasks:
+  - name: Restart Kurtosis Engine
+    command: | 
+      kurtosis engine restart
+      clear
+  - name: Open Readme
+    command: |
+      code README.md
+      clear
+  - name: Source Autocomplete
+    command: |
+      source <(kurtosis completion bash)
+      echo "source <(kurtosis completion bash)" >> ~/.bashrc
+      clear  
