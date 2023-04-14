@@ -6,6 +6,7 @@ The [original quickstart][quickstart] in our docs is in a "code-along" format wh
 ```bash
 kurtosis run --enclave quickstart main.star
 ```
+
 The `main.star` file in this directory contains the build steps for a composable and portable multi-container test environment. Specifically, Kurtosis will use those instructions to:
 - [Start a containerized Postgres database in Kurtosis][run-postgres],
 - [Seed your database with test data using task sequencing][add-data],
