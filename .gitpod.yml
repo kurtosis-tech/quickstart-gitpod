@@ -2,21 +2,11 @@ image:
   file: .gitpod.Dockerfile
 
 tasks:
-  - name: (1) Start Kurtosis Engine
+  - name: Setup Kurtosis
     command: |
       kurtosis engine restart
-      clear
-  - name: (2) Initialize workspace
-    command: | 
       kurtosis run github.com/fake-package/fake-package-purely-for-analytics || kurtosis clean -a
-      clear
-  - name: (3) Open Readme
-    command: |
       code README.md
-      clear
-  - name: (4) Install tab-completion
-    command: |
-      source <(kurtosis completion bash)
       echo "source <(kurtosis completion bash)" >> ~/.bashrc
       clear  
 
