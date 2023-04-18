@@ -1,4 +1,4 @@
-FROM gitpod/workspace-base
+FROM gitpod/workspace-go
 
 RUN echo "deb [trusted=yes] https://apt.fury.io/kurtosis-tech/ /" | sudo tee /etc/apt/sources.list.d/kurtosis.list
 RUN sudo apt update
