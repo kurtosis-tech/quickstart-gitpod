@@ -28,7 +28,7 @@ const (
 	enclaveIdPrefix       = "quick-start-go-example"
 	isPartitioningEnabled = false
 
-	quickstartPackage = "github.com/kurtosis-tech/awesome-kurtosis/quickstart"
+	quickstartPackage = "github.com/kurtosis-tech/quickstart-gitpod"
 
 	defaultParallelism = 4
 	noDryRun           = false

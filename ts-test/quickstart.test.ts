@@ -13,7 +13,7 @@ const IS_PARTITIONING_ENABLED = false;
 const EMPTY_PACKAGE_PARAMS = "{}"
 const IS_NOT_DRY_RUN = false
 
-const QUICKSTART_PACKAGE = "github.com/kurtosis-tech/awesome-kurtosis/quickstart"
+const QUICKSTART_PACKAGE = "github.com/kurtosis-tech/quickstart-gitpod"
 const API_SERVICE_NAME = "api"
 const CONTENT_TYPE = "application/json"
 const HTTP_PORT_ID = "http"
