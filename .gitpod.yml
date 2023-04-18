@@ -2,7 +2,7 @@ image:
   file: .gitpod.Dockerfile
 
 tasks:
-  - name: (1) Boot Kurtosis Engine
+  - name: (1) Start Kurtosis Engine
     command: |
       kurtosis engine restart
       clear
