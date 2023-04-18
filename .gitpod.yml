@@ -7,6 +7,7 @@ tasks:
       kurtosis engine restart
       kurtosis run github.com/fake-package/fake-package-purely-for-analytics || kurtosis clean -a
       code README.md
+      source <(kurtosis completion bash)
       echo "source <(kurtosis completion bash)" >> ~/.bashrc
       clear  
 
