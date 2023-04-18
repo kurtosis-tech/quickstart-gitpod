@@ -100,3 +100,4 @@ def insert_data(plan, data):
             content_type = "application/json",
             body = json.encode(data),
         )
+    )
