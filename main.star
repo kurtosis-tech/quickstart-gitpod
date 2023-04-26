@@ -13,7 +13,9 @@ def run(plan, args):
     # Make data available for use in Kurtosis
     data_package_module_result = data_package_module.run(plan, struct())
 
-    # Add a Postgres server
+    # Add a Postgres server 
+    postgres_flags = ["-U", POSTGRES_USER,"-d", POSTGRES_DB]
+
     postgres = plan.add_service(
         name = "postgres",
         config = ServiceConfig(
@@ -28,19 +30,15 @@ def run(plan, args):
             },
             files = {
                 SEED_DATA_DIRPATH: data_package_module_result.files_artifact,
-            }
+            },
+            ready_conditions = ReadyCondition(
+                recipe = ExecRecipe(command = ["psql"] + postgres_flags + ["-c", "\\l"]),
+                field = "code",
+                assertion = "==",
+                target_value = 0,
+                timeout = "5s",
+            )
         ),
-    )
-
-    # Wait for Postgres to become available
-    postgres_flags = ["-U", POSTGRES_USER,"-d", POSTGRES_DB]
-    plan.wait(
-        service_name = "postgres",
-        recipe = ExecRecipe(command = ["psql"] + postgres_flags + ["-c", "\\l"]),
-        field = "code",
-        assertion = "==",
-        target_value = 0,
-        timeout = "5s",
     )
 
     # Load the data into Postgres
@@ -71,20 +69,17 @@ def run(plan, args):
                 "PGRST_DB_ANON_ROLE": POSTGRES_USER,
             },
             ports = {POSTGREST_PORT_ID: PortSpec(3000, application_protocol = "http")},
+            ready_conditions = ReadyCondition(
+                recipe = GetHttpRequestRecipe(
+                    port_id = POSTGREST_PORT_ID,
+                    endpoint = "/actor?limit=5",
+                ),
+                field = "code",
+                assertion = "==",
+                target_value = 200,
+                timeout = "5s", 
+            )
         )
-    )
-
-    # Wait for PostgREST to become available
-    plan.wait(
-        service_name = "api",
-        recipe = GetHttpRequestRecipe(
-            port_id = POSTGREST_PORT_ID,
-            endpoint = "/actor?limit=5",
-        ),
-        field = "code",
-        assertion = "==",
-        target_value = 200,
-        timeout = "5s",
     )
 
     # Insert data
