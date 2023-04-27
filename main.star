@@ -30,14 +30,7 @@ def run(plan, args):
             },
             files = {
                 SEED_DATA_DIRPATH: data_package_module_result.files_artifact,
-            },
-            ready_conditions = ReadyCondition(
-                recipe = ExecRecipe(command = ["psql"] + postgres_flags + ["-c", "\\l"]),
-                field = "code",
-                assertion = "==",
-                target_value = 0,
-                timeout = "5s",
-            )
+            }
         ),
     )
 
@@ -69,16 +62,6 @@ def run(plan, args):
                 "PGRST_DB_ANON_ROLE": POSTGRES_USER,
             },
             ports = {POSTGREST_PORT_ID: PortSpec(3000, application_protocol = "http")},
-            ready_conditions = ReadyCondition(
-                recipe = GetHttpRequestRecipe(
-                    port_id = POSTGREST_PORT_ID,
-                    endpoint = "/actor?limit=5",
-                ),
-                field = "code",
-                assertion = "==",
-                target_value = 200,
-                timeout = "5s", 
-            )
         )
     )
 
