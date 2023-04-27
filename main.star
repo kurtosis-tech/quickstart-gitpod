@@ -14,8 +14,6 @@ def run(plan, args):
     data_package_module_result = data_package_module.run(plan, struct())
 
     # Add a Postgres server 
-    postgres_flags = ["-U", POSTGRES_USER,"-d", POSTGRES_DB]
-
     postgres = plan.add_service(
         name = "postgres",
         config = ServiceConfig(
